@@ -6,7 +6,7 @@ const ItemSchema = new Schema({
         type: String,
         min: 3,
         max: 50,
-        required: true,
+  required: true,
     },
     description: {
         type: String,
