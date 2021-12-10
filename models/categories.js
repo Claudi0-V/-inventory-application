@@ -15,10 +15,6 @@ const CategoryScheme = new Schema({
         max: 125,
         required: true,
     },
-    url: {
-        type: String,
-        required: true,
-    }
 })
 
 const Category = mongoose.model('Category', CategoryScheme)

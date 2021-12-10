@@ -1,17 +1,15 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1= My Store
+  p Categories:
 
-  if item
+  if items
     each item in items
-      h2= item.name
+      .item
       a
+        h2= item.name
         h3= item.description
-        p= item.category
-        p= item. price
-        p= item.stock_quantity
   else
     h2= "there's no items here"
 
