@@ -1,15 +1,15 @@
 extends layout
 
 block content
-  h1= My Store
+  h1 My Store
   p Categories:
 
   if items
     each item in items
       .item
-      a
-        h2= item.name
-        h3= item.description
+          a(href='https://www.google.com')
+            h2.name= item.name
+            h3.description= item.description
   else
     h2= "there's no items here"
 
