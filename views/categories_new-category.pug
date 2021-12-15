@@ -1,5 +1,10 @@
 extends layout
-
 block content
-    h1 new category
+    h1 New category
+    form(role='form' method='POST' action="/categories")
+        label(for="category-name") Name:
+        input(type="text" name="name" id="category-name")
+        label(for="category-description" name="description") Description:
+        input(type="text" name="description"  id="category-description")
+        button(type="sumit") submit
 

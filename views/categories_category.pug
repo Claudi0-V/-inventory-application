@@ -1,5 +1,12 @@
 extends layout
 
 block content
-    h1 category
+    h1 All Categories:
+    if allCategories.length <= 0
+        p there's no categories.
+    else
+        each category in allCategories
+            h1= category.name
+            p= category.description
+
 

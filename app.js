@@ -3,10 +3,13 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-require("dotenv").config();
 
 const app = express();
+const indexRouter = require("./routes/index");
+const categoriesRouter = require("./routes/categories");
 
+
+require("dotenv").config();
 const mongoose = require("mongoose");
 const dbURI = process.env.DBURI;
 
@@ -15,11 +18,11 @@ mongoose
   .then((result) => app.listen(3000))
   .catch((error) => console.log(error));
 
-const indexRouter = require("./routes/index");
-const categoriesRouter = require("./routes/categories");
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
+
+//middleware
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
