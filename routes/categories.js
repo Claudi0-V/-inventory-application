@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Item = require('../models/items.js')
-const Category = require('../models/categories.js')
+const category = require('../models/categories.js')
 
 
 const fakeCategories = [
@@ -43,11 +43,14 @@ router.post('/', async (req, res) => {
     }
 })
 
-
+/**/
 router.get("/:category", async (req, res) => {
-    const category = req.params.category;
-    const categories = await Item.find({category})
-    res.render('categories_categories_specific-category', {categories});
+    //const category = req.params.category;
+    //const categories = await Item.find({category})
+    const category = req.params
+    const [specificCategory] = fakeCategories.filter(item => item.name === category.category);
+    console.log(specificCategory)
+    res.render('categories_specific-category', {specificCategory});
 
 } )
 

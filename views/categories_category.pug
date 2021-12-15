@@ -6,7 +6,9 @@ block content
         p there's no categories.
     else
         each category in allCategories
-            h1= category.name
-            p= category.description
+            .category-container
+                a(href=`categories/${category.name}`)
+                    h1=category.name
+                p= category.description
 
 
