@@ -3,13 +3,12 @@ const router = express.Router();
 const Item = require('../models/items.js')
 
 
-
 router.get("/",  (req, res,) => {
-    res.render('category', {title: "all categories"})
+    res.render('categories_category', {title: "all categories"})
 });
 
 router.get('/new-category', (req, res) => {
-    res.render('new-category')
+    res.render('categories_new-category', {title: "new category"})
 })
 
 router.post('/new-category', async (req, res) => {
@@ -23,13 +22,11 @@ router.post('/new-category', async (req, res) => {
     }
 })
 
-
 router.get("/:category", async (req, res) => {
     const category = req.params.category;
     const categories = await Item.find({category})
-    res.render('specific-category', {categories});
+    res.render('categories_categories_specific-category', {categories});
 
 } )
-
 
 module.exports = router;
