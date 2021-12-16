@@ -20,12 +20,13 @@ const ItemSchema = new Schema({
     },
     price: {
         type: Number,
-        min: 5,
+        min: 2,
         required: true
     },
     stock_quantity: {
         type: Number,
-        required: true
+        min: 0,
+        required: true,
     }
 })
 

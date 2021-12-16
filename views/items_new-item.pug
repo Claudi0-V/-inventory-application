@@ -1,0 +1,19 @@
+extends layout
+
+block content
+    h1 New category
+    form(role='form' method='POST' action="/items")
+        label(for="category-name") Name:
+        input(type="text" name="name" id="item-name" required)
+        label(for="item-description") Description:
+        input(type="text" name="description" id="item-description" required="true")
+        label(for="category") Category:
+        input(type="text" name="category"  id="category" required="true")
+        label(for="price") Price:
+        input(type="number" name="price"  id="price" required="true" min=2)
+        label(for="stock_quantity") Quantity:
+        input(type="number" name="stock_quantity"  id="stock_quantity" required="true" min=0)
+
+        button(type="sumit") submit
+
+

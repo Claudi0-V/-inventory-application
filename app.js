@@ -5,9 +5,9 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 
 const app = express();
-const indexRouter = require("./routes/index");
+const indexRouter = require("./routes/items");
 const categoriesRouter = require("./routes/categories");
-
+const itemsRouter = require("./routes/items");
 
 require("dotenv").config();
 const mongoose = require("mongoose");
@@ -29,6 +29,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
+app.use("/items", itemsRouter);
 app.use("/categories", categoriesRouter);
 
 app.use((req, res, next) => {
