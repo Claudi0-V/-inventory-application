@@ -3,8 +3,8 @@ block content
     h1 New category
     form(role='form' method='POST' action="/categories")
         label(for="category-name") Name:
-        input(type="text" name="name" id="category-name")
-        label(for="category-description" name="description") Description:
-        input(type="text" name="description"  id="category-description")
+        input(type="text", name="name", id="category-name", min=5, max=32)
+        label(for="category-description") Description:
+        input(type="text", name="description", id="category-description",  min=5, max=125)
         button(type="sumit") submit
 
