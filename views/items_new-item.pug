@@ -4,11 +4,11 @@ block content
     h1 New category
     form(role='form' method='POST' action="/items")
         label(for="category-name") Name:
-        input(type="text" name="name" id="item-name" required)
+        input(type="text" name="name" id="item-name" required="true" minlength=3 maxlength=50, )
         label(for="item-description") Description:
-        input(type="text" name="description" id="item-description" required="true")
+        input(type="text" name="description" id="item-description" required="true" minlength=10 maxlength=150)
         label(for="category") Category:
-        input(type="text" name="category"  id="category" required="true")
+        input(type="text" name="category"  id="category" required="true" minlength=5 maxlength=32,)
         label(for="price") Price:
         input(type="number" name="price"  id="price" required="true" min=2)
         label(for="stock_quantity") Quantity:
