@@ -1,10 +1,12 @@
 extends layout
 block content
     h1 New category
+    if error
+        p(style="color:red; margin: 5px") It appears that occured an error
     form(role='form' method='POST' action="/categories")
         label(for="category-name") Name:
-        input(type="text", name="name", id="category-name", min=5, max=32)
+        input(type="text", name="name", id="category-name", minlength=5, maxlength=32, value=  error ? error.name : '', required="true")
         label(for="category-description") Description:
-        input(type="text", name="description", id="category-description",  min=5, max=125)
+        input(type="text", name="description", id="category-description", minlength=5, maxlength=125, value= error ? error.description : '', required="true")
         button(type="sumit") submit
 
