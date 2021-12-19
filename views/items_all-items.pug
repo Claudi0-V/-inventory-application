@@ -6,10 +6,10 @@ block content
   if items
     each item in items
       .item(style='background-color: #eee; padding: 5px; border-radius: 5px;')
-          a(href=`/items/${item.name}`)
+          a(href=`/items/${item._id}`)
             h2.name= item.name
           h3.description= item.description
-          p.category= item.category
+          p.category= item.category.name
           p.price= item.price
           p.stock-quantity= item.stock_quantity
   else

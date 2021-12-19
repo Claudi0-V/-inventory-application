@@ -1,8 +1,28 @@
 extends layout
 
 block content
-    h1= item.name
-    p= item.description
-    p= item.cetegory
-    p= item.price
-    p= item.stock_quantity
+    .content
+        h1= item.name
+        p= item.description
+        p= item.category.name
+        p= item.price
+        p= item.stock_quantity
+    button(class="delete-button" data-delete=item._id) Delete
+    a(class="update-button" href=`/items/${item._id}/update`) Update
+
+
+    script.
+        const deleteButton = document.querySelector('.delete-button');
+        deleteButton.addEventListener('click', async (event) => {
+            try {
+                const endpoint = `/items/${deleteButton.dataset.delete}`;
+                const redirectJson = await fetch(endpoint, {method: 'DELETE'});
+                const redirectParsed = await redirectJson.json();
+                window.location.href = redirectParsed.redirect
+            } catch (err) {
+                console.log(err)
+            }
+        })
+        //UPDATE
+
+

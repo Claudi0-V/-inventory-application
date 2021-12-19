@@ -8,7 +8,9 @@ block content
         label(for="item-description") Description:
         input(type="text" name="description" id="item-description" required="true" minlength=10 maxlength=150)
         label(for="category") Category:
-        input(type="text" name="category"  id="category" required="true" minlength=5 maxlength=32,)
+        select(id="category" name="category" selected="")
+            each category in categories
+                option(value=`${category._id}`)= category.name
         label(for="price") Price:
         input(type="number" name="price"  id="price" required="true" min=2)
         label(for="stock_quantity") Quantity:
