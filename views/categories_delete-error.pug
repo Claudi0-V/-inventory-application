@@ -1,0 +1,6 @@
+extends layout
+
+block content
+    h1 You can only delete this Category after you delete or change the Category on those items:
+    each item in items
+        a(href=`/items/${item._id}`)= item.name

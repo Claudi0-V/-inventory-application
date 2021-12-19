@@ -1,5 +1,23 @@
 extends layout
 
 block content
-    h1= category.name
-    p= category.description
+    .info
+        h1= category.name
+        p= category.description
+    button(class="delete-button" data-delete=category.name) Delete
+
+    script.
+        const deleteButton = document.querySelector('.delete-button');
+        deleteButton.addEventListener('click', async (event) => {
+            try {
+                const endpoint = `/categories/${deleteButton.dataset.delete}`;
+                console.log("here")
+                const redirectJson = await fetch(endpoint, {method: 'DELETE'});
+                const redirectParsed = await redirectJson.json();
+                await                 console.log(redirectParsed)
+
+                window.location.href = redirectParsed.redirect
+            } catch (err) {
+                console.log(err)
+            }
+        })

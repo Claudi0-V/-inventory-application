@@ -10,9 +10,9 @@ const CategoryScheme = new Schema({
   },
   description: {
     type: String,
+    required: true,
     min: 5,
     max: 500,
-    required: true,
   },
 });
 
