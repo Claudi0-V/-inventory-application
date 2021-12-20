@@ -2,6 +2,11 @@ const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
 const logger = require("morgan");
+const cookieParser = require("cookie-parser");
+
+
+
+
 
 const app = express();
 const indexRouter = require("./routes/index");
@@ -14,7 +19,7 @@ const dbURI = process.env.DBURI;
 
 mongoose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => app.listen(3000))
+  .then(() => console.log("succes"))
   .catch((error) => console.log(error));
 
 app.set("views", path.join(__dirname, "views"));
@@ -40,3 +45,6 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
+
+module.exports = app;
+
