@@ -54,7 +54,7 @@ const deleteCategory = async (req, res) => {
     if (items.length > 0) {
       res.json({ redirect: `/categories/${name}/${_id}` });
     } else {
-      await Category.deleteOne({ category });
+      await Category.findByIdAndDelete(_id);
       res.json({ redirect: "/categories" });
     }
   } catch (err) {
