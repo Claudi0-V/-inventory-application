@@ -1,12 +1,8 @@
 const createError = require("http-errors");
 const express = require("express");
+const session = require("express-session");
+const MongoStore = require("connect-mongo-session")(session);
 const path = require("path");
-const logger = require("morgan");
-const cookieParser = require("cookie-parser");
-
-
-
-
 
 const app = express();
 const indexRouter = require("./routes/index");
@@ -16,6 +12,7 @@ const itemsRouter = require("./routes/items");
 require("dotenv").config();
 const mongoose = require("mongoose");
 const dbURI = process.env.DBURI;
+const store = new MongoStore({ uri: dbURI, collection: "session" });
 
 mongoose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -30,11 +27,20 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(
+  session({
+    secret: process.env.SECRET,
+    resave: true,
+    saveUninitialized: false,
+    store: store,
+  })
+);
 
-app.use("/", indexRouter);
 app.use("/categories", categoriesRouter);
 app.use("/items", itemsRouter);
+app.use("/", indexRouter);
 
+//in case of errors
 app.use((req, res, next) => {
   next(createError(404));
 });
@@ -47,4 +53,3 @@ app.use(function (err, req, res, next) {
 });
 
 module.exports = app;
-
