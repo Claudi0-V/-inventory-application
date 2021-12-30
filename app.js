@@ -1,7 +1,8 @@
 const createError = require("http-errors");
 const express = require("express");
 const session = require("express-session");
-const MongoStore = require("connect-mongo-session")(session);
+const MongoStore = require("connect-mongodb-session")(session);
+const passport = require("passport");
 const path = require("path");
 
 const app = express();
@@ -11,7 +12,7 @@ const itemsRouter = require("./routes/items");
 
 require("dotenv").config();
 const mongoose = require("mongoose");
-const dbURI = process.env.DBURI;
+const dbURI = process.env.MONGO_DB_URI;
 const store = new MongoStore({ uri: dbURI, collection: "session" });
 
 mongoose
@@ -23,7 +24,6 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
 //middleware
-app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
@@ -36,7 +36,7 @@ app.use(
   })
 );
 
-require("./config/passport");
+require("./configs/passport");
 app.use(passport.initialize());
 app.use(passport.session());
 

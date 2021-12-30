@@ -5,7 +5,7 @@ const { body, validationResult } = require("express-validator");
 const itemIndex = async (req, res) => {
   try {
     const items = await Item.find().populate("category");
-    res.render("items_all-items", { title: "inventory", items });
+    res.render("items/all-items", { title: "inventory", items });
   } catch (error) {
     console.log(error);
   }
@@ -33,7 +33,7 @@ const itemPost = [
     try {
       const errors = validationResult(req);
       if (!errors) {
-        res.render("items_new-item", {
+        res.render("items/new-item", {
           title: "Add New Item",
           error: req.body,
         });
@@ -50,13 +50,13 @@ const itemPost = [
 
 const getNewItem = async (req, res) => {
   const categories = await Category.find();
-  res.render("items_new-item", { title: "Add New Item", categories });
+  res.render("items/new-item", { title: "Add New Item", categories });
 };
 
 const getSpecificItem = async (req, res) => {
   const id = req.params.id;
   const item = await Item.findById(id).populate("category");
-  res.render("items_specific-item", {
+  res.render("items/specific-item", {
     title: item.name,
     item,
   });
@@ -67,7 +67,7 @@ const getUpdtadeItem = async (req, res) => {
   const item = await Item.findById(id).populate("category");
   const categories = await Category.find();
 
-  res.render("items_update-item", {
+  res.render("items/update-item", {
     title: "Update Item",
     item,
     categories,
@@ -87,7 +87,7 @@ const postUpdateItem = [
       console.log(id);
       const errors = validationResult(req);
       if (!errors) {
-        res.render("items_update-item", {
+        res.render("items/update-item", {
           title: "Update Item",
           error: req.body,
         });
