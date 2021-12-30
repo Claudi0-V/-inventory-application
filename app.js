@@ -36,6 +36,10 @@ app.use(
   })
 );
 
+require("./config/passport");
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use("/categories", categoriesRouter);
 app.use("/items", itemsRouter);
 app.use("/", indexRouter);
