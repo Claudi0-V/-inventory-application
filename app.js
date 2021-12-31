@@ -40,6 +40,10 @@ app.use(
 require("./configs/passport");
 app.use(passport.initialize());
 app.use(passport.session());
+app.use((req, res, next) => {
+  res.locals.isAuth = req.isAuthenticated();
+  next();
+});
 
 app.use("/categories", categoriesRouter);
 app.use("/items", itemsRouter);

@@ -8,13 +8,17 @@ html
         h1 Inventory
         ul
             li
-                a(href="/categories") Categories
+              a(href="/categories") Categories
+            if isAuth
+              li
+                  a(href="/categories/new-category") New Category
             li
-                a(href="/categories/new-category") New Category
-            li
-                a(href="/items") Items
-            li
-                a(href="/items/new-item") New Item
-        a(href="/user/login") Login
-        a(href="/user/logout") Logout
+              a(href="/items") Items
+            if isAuth
+              li
+                  a(href="/items/new-item") New Item
+        if !isAuth 
+          a(href="/user/login") Login
+        if isAuth
+          a(href="/user/logout") Logout
     block content
