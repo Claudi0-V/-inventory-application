@@ -5,9 +5,11 @@ const bcrypt = require("bcryptjs");
 
 const verifyCallback = async (email, password, done) => {
   try {
-    const user = User.findOne({ email });
+    const user = await User.findOne({ email });
+    console.log(user)
     if (!user) return done(null, false);
     const isPasswordValid = await bcrypt.compare(password, user.salt);
+    console.log(isPasswordValid, password)
     if (isPasswordValid) return done(null, user);
     return done(null, false);
   } catch (err) {

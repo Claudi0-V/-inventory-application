@@ -6,16 +6,6 @@ const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const { body, validationResult } = require("express-validator");
 
-router.get("/login", (req, res) => {
-  res.render("login", { title: "Login Page" });
-});
-
-router.post("/login", passport.authenticate("local"), (req, res) => {
-  console.log(req.body);
-  console.log("-------------------------");
-  res.redirect("/user/register");
-});
-
 router.get("/register", (req, res) => {
   res.render("register", { title: "Registration Page" });
 });
@@ -48,12 +38,12 @@ router.post(
           error: "User with this email already exists",
         });
       } else {
-        const salt = await bcrypt.genSalt(12);
-        const {username, email, password} = req.body;
+        const { username, email, password } = req.body;
+        const hash = await bcrypt.hash(password, 12);
         const user = await new User({
           username: username,
           email: email,
-          salt: salt,
+          salt: hash,
         });
         await user.save();
         res.redirect("/user/login");
@@ -63,5 +53,18 @@ router.post(
     }
   }
 );
+
+router.get("/login", (req, res) => {
+  res.render("login", { title: "Login Page" });
+});
+
+router.post("/login", passport.authenticate("local"), (req, res) => {
+  res.redirect("/user/register");
+});
+
+router.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/");
+});
 
 module.exports = router;

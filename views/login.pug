@@ -1,4 +1,11 @@
 extends layout
 
 block content
-  h1 Login page
+    form(method="POST" action="/user/login")
+      label(for="email") email
+      input(type="email", id="email", name="username",min=10, required, value=email ? email : "")
+      label(for="password") Password
+      input(type="password", id="password", name="password", min=10, required, value=password ? password : "")
+      button(type="submit") Login
+    .after-form
+      p New here? consider #[a(href="/user/register") register]
