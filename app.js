@@ -9,6 +9,7 @@ const app = express();
 const indexRouter = require("./routes/index");
 const categoriesRouter = require("./routes/categories");
 const itemsRouter = require("./routes/items");
+const loginRouter = require("./routes/login");
 
 require("dotenv").config();
 const mongoose = require("mongoose");
@@ -42,6 +43,7 @@ app.use(passport.session());
 
 app.use("/categories", categoriesRouter);
 app.use("/items", itemsRouter);
+app.use("/user", loginRouter);
 app.use("/", indexRouter);
 
 //in case of errors
