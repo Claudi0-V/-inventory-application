@@ -1,0 +1,18 @@
+extends layout.pug
+
+block content
+  form(method="POST" action="/user/register")
+    label(for="name") name
+    input(type="text", id="name", name="username",min=10, required, value=username ? username : "")
+    label(for="email") email
+    input(type="email", id="email", name="email",min=10, required, value=email ? email : "")
+    label(for="password") Password
+    input(type="password", id="password", name="password", min=10, required, value=password ? password : "")
+    label(for="password2") Confirm password
+    input(type="password", id="password2", name="password2", min=10, required, value=password2 ? password2 : "")
+    button(type="submit") Register
+  .after-form
+    p Already registered? Try to #[a(href="/user/register") login]
+  if error
+    p #{error[0]}
+
